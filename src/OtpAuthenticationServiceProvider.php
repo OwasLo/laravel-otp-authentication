@@ -4,7 +4,6 @@ namespace Owaslo\OtpAuthentication;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Owaslo\OtpAuthentication\Commands\OtpAuthenticationCommand;
 
 class OtpAuthenticationServiceProvider extends PackageServiceProvider
 {

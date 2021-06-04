@@ -2,14 +2,9 @@
 
 namespace Owaslo\OtpAuthentication\Notifications;
 
-use Owaslo\Textit\TextitMessage;
-use Illuminate\Notifications\Notification;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Bus\Queueable;
-use Owaslo\OtpAuthentication\Models\OtpToken;
+use Illuminate\Notifications\Notification;
+use Owaslo\Textit\TextitMessage;
 
 class VerifyPhone extends Notification
 {
@@ -29,7 +24,7 @@ class VerifyPhone extends Notification
      */
     public function __construct($otp)
     {
-        $this->token=$otp;
+        $this->token = $otp;
     }
 
     /**

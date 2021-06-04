@@ -8,23 +8,24 @@ use RandomLib\Factory as RandomLibFactory;
 
 class OtpToken extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  // Disable Laravel's mass assignment protection
-  //protected $guarded = [];
+    // Disable Laravel's mass assignment protection
+    //protected $guarded = [];
 
-  /**
-   * Get the parent otp authenticable model.
-   */
-  public function otpAuthenticable()
-  {
-    return $this->morphTo();
-  }
+    /**
+     * Get the parent otp authenticable model.
+     */
+    public function otpAuthenticable()
+    {
+        return $this->morphTo();
+    }
 
-  public static function generateOTP()
-  {
-    $factory = new RandomLibFactory();
-    $generator = $factory->getLowStrengthGenerator();
-    return $generator->generateInt(1000, 9999);
-  }
+    public static function generateOTP()
+    {
+        $factory = new RandomLibFactory();
+        $generator = $factory->getLowStrengthGenerator();
+
+        return $generator->generateInt(1000, 9999);
+    }
 }

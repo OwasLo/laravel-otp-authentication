@@ -2,8 +2,8 @@
 
 namespace Owaslo\OtpAuthentication\Traits;
 
-use Owaslo\OtpAuthentication\Models\OtpToken;
 use Illuminate\Support\Carbon;
+use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\OtpAuthentication\Notifications\VerifyPhone;
 
 trait OtpAuthenticable
@@ -23,7 +23,7 @@ trait OtpAuthenticable
      */
     public function hasVerifiedPhone()
     {
-        return !is_null($this->phone_verified_at);
+        return ! is_null($this->phone_verified_at);
     }
 
     /**
