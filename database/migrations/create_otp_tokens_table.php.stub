@@ -10,8 +10,9 @@ return new class extends Migration
     {
         Schema::create('otp_tokens', function (Blueprint $table) {
             $table->id();
-            $table->morphs('otp_authenticable');
+            $table->nullableMorphs('otp_authenticable');
             $table->unsignedSmallInteger('otp');
+            $table->string('phone',11)->nullable();;
             $table->date('expires_at');
             $table->timestamps();
         });
