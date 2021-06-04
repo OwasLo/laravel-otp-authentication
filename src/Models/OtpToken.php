@@ -11,7 +11,7 @@ class OtpToken extends Model
     use HasFactory;
 
     // Disable Laravel's mass assignment protection
-    //protected $guarded = [];
+    protected $guarded = [];
 
     /**
      * Get the parent otp authenticable model.
