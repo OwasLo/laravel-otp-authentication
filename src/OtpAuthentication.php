@@ -12,7 +12,7 @@ class OtpAuthentication
 {
     public static function sendPhoneVerificationCode($phone)
     {
-        $otpToken = $this->otpToken()->updateOrCreate(
+        $otpToken = OtpToken::updateOrCreate(
             ['phone' => $phone],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
