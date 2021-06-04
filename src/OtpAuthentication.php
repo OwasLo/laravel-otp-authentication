@@ -2,13 +2,12 @@
 
 namespace Owaslo\OtpAuthentication;
 
-use Owaslo\OtpAuthentication\Contracts\OtpAuthenticable;
-use Owaslo\OtpAuthentication\Exceptions\OtpHasNotSent;
 use Illuminate\Support\Carbon;
 use Owaslo\OtpAuthentication\Exceptions\OtpExpired;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\Textit\Textit;
 use Owaslo\Textit\TextitMessage;
+use Owaslo\OtpAuthentication\Contracts\OtpAuthenticable;
 
 class OtpAuthentication
 {
@@ -33,27 +32,43 @@ class OtpAuthentication
         if ($otpToken == null) {
             return [
                 'status' => false,
+<<<<<<< HEAD
                 'message' => "OTP_NOT_SENT"
+=======
+                'message' => "OTP_NOT_SENT",
+>>>>>>> 8a5f16ed8d19ba56a525c62710b6b31513b9fbbd
             ];
         }
 
         if ($otpToken->expires_at < Carbon::now()) {
             return [
                 'status' => false,
+<<<<<<< HEAD
                 'message' => "OTP_EXPIRED"
+=======
+                'message' => "OTP_EXPIRED",
+>>>>>>> 8a5f16ed8d19ba56a525c62710b6b31513b9fbbd
             ];
         }
 
         if ($otpToken->otp != $otp) {
             return [
                 'status' => false,
+<<<<<<< HEAD
                 'message' => "OTP_INVALID"
+=======
+                'message' => "OTP_INVALID",
+>>>>>>> 8a5f16ed8d19ba56a525c62710b6b31513b9fbbd
             ];
         }
 
         return [
             'status' => true,
+<<<<<<< HEAD
             'message' => "OTP_SUCCESSFUL"
+=======
+            'message' => "OTP_SUCCESSFUL",
+>>>>>>> 8a5f16ed8d19ba56a525c62710b6b31513b9fbbd
         ];
     }
 }
