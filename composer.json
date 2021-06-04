@@ -19,6 +19,7 @@
         "php": "^8.0",
         "illuminate/contracts": "^8.37",
         "owaslo/textit": "9999999-dev",
+        "paragonie/random-lib": "^2.0",
         "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {
