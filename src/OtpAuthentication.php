@@ -19,8 +19,9 @@ class OtpAuthentication
         app(Textit::class)->send(new TextitMessage($phone, 'Code:'.$otpToken->otp.', Please enter this code to verify your phone number'));
     }
 
-    public static function verifyPhone($phone, $otp){
-        $otpToken = OtpToken::where('phone',$phone)->first();
+    public static function verifyPhone($phone, $otp)
+    {
+        $otpToken = OtpToken::where('phone', $phone)->first();
 
         if ($otpToken == null) {
             return [
