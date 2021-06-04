@@ -17,7 +17,7 @@ class OtpAuthentication
             ['phone' => $phone],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
-        $this->app->make(Textit::class)->send(TextitMessage($phone, 'Code:'.$otpToken->otp.', Please enter this code to verify your phone number'));
+        app(Textit::class)->send(TextitMessage($phone, 'Code:'.$otpToken->otp.', Please enter this code to verify your phone number'));
     }
 
     public static function sendOTP(OtpAuthenticable $user)
