@@ -3,11 +3,10 @@
 namespace Owaslo\OtpAuthentication;
 
 use Illuminate\Support\Carbon;
-use Owaslo\OtpAuthentication\Exceptions\OtpExpired;
+use Owaslo\OtpAuthentication\Contracts\OtpAuthenticable;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\Textit\Textit;
 use Owaslo\Textit\TextitMessage;
-use Owaslo\OtpAuthentication\Contracts\OtpAuthenticable;
 
 class OtpAuthentication
 {
@@ -32,27 +31,27 @@ class OtpAuthentication
         if ($otpToken == null) {
             return [
                 'status' => false,
-                'message' => "OTP_NOT_SENT"
+                'message' => "OTP_NOT_SENT",
             ];
         }
 
         if ($otpToken->expires_at < Carbon::now()) {
             return [
                 'status' => false,
-                'message' => "OTP_EXPIRED"
+                'message' => "OTP_EXPIRED",
             ];
         }
 
         if ($otpToken->otp != $otp) {
             return [
                 'status' => false,
-                'message' => "OTP_INVALID"
+                'message' => "OTP_INVALID",
             ];
         }
 
         return [
             'status' => true,
-            'message' => "OTP_SUCCESSFUL"
+            'message' => "OTP_SUCCESSFUL",
         ];
     }
 }
