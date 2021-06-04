@@ -20,6 +20,36 @@ class OtpAuthentication
         
     }
 
+    public static function verifyPhone($phone, $otp){
+        $otpToken = OtpToken::where('phone',$phone)->first();
+
+        if ($otpToken == null) {
+            return [
+                'status' => false,
+                'message' => "OTP_NOT_SENT",
+            ];
+        }
+
+        if ($otpToken->expires_at < Carbon::now()) {
+            return [
+                'status' => false,
+                'message' => "OTP_EXPIRED",
+            ];
+        }
+
+        if ($otpToken->otp != $otp) {
+            return [
+                'status' => false,
+                'message' => "OTP_INVALID",
+            ];
+        }
+
+        return [
+            'status' => true,
+            'message' => "OTP_SUCCESSFUL",
+        ];
+    }
+
     public static function sendOTP(OtpAuthenticable $user)
     {
         $user->sendOtpAuthenticationNotification();
