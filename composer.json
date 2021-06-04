@@ -1,24 +1,25 @@
 {
-    "name": "vendor_slug/package_slug",
-    "description": ":package_description",
+    "name": "owaslo/laravel-otp-authentication",
+    "description": "To authenticate users using OTP",
     "keywords": [
-        ":vendor_name",
+        "OwasLo",
         "laravel",
-        "package_slug"
+        "laravel-otp-authentication"
     ],
-    "homepage": "https://github.com/vendor_slug/package_slug",
+    "homepage": "https://github.com/owaslo/laravel-otp-authentication",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Upeksha Liyanage",
+            "email": "upeksha@owaslo.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.4.3",
-        "illuminate/contracts": "^8.37"
+        "illuminate/contracts": "^8.37",
+        "owaslo/textit": "9999999-dev",
+        "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {
         "brianium/paratest": "^6.2",
@@ -30,13 +31,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Owaslo\\OtpAuthentication\\": "src",
+            "Owaslo\\OtpAuthentication\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Owaslo\\OtpAuthentication\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -50,10 +51,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Owaslo\\OtpAuthentication\\OtpAuthenticationServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\SkeletonFacade"
+                "OtpAuthentication": "Owaslo\\OtpAuthentication\\OtpAuthenticationFacade"
             }
         }
     },

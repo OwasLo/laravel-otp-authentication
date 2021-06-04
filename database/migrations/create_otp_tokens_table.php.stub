@@ -8,11 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('skeleton_table', function (Blueprint $table) {
+        Schema::create('otp_tokens', function (Blueprint $table) {
             $table->id();
-
-            // add fields
-
+            $table->morphs('otp_authenticable');
+            $table->unsignedSmallInteger('otp');
+            $table->date('expires_at');
             $table->timestamps();
         });
     }
