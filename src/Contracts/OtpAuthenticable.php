@@ -7,7 +7,7 @@ interface OtpAuthenticable
     /**
      * Determine the otp token for a user.
      *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function otpToken();
 
@@ -19,16 +19,23 @@ interface OtpAuthenticable
     public function sendOtpAuthenticationNotification();
 
     /**
-     * Determine the otp token for a user.
+     * Login user using otp
      *
-     * @return bool
+     * @return array
      */
-    public function otpLogin();
+    public function otpLogin($guard = "users", $otp);
 
     /**
-     * Determine the otp token for a user.
+     * Logout user
      *
-     * @return bool
+     * @return void
      */
     public function otpLogout();
+
+    /**
+     * Get user by phone number
+     *
+     * @return void
+     */
+    public static function findUserByPhone($phone, $attribute = "phone");
 }

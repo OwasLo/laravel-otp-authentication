@@ -12,6 +12,8 @@ trait OtpAuthenticable
 {
     /**
      * Determine the otp token for a user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function otpToken()
     {
@@ -36,7 +38,7 @@ trait OtpAuthenticable
     /**
      * Send otp notification.
      *
-     * @return void
+     * @return array
      */
     public function otpLogin($guard = "users", $otp)
     {
