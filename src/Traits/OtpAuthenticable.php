@@ -15,7 +15,7 @@ trait OtpAuthenticable
      */
     public function otpToken()
     {
-        return $this->morphOne(OtpToken::class, 'otp_authenticable');
+        return $this->morphOne(OtpToken::class, 'otpAuthenticable');
     }
 
     /**
@@ -64,8 +64,14 @@ trait OtpAuthenticable
         $session->regenerateToken();
     }
 
+    /**
+     * Send otp notification.
+     *
+     * @return void
+     */
     public static function findUserByPhone($phone, $attribute = "phone")
     {
         return get_called_class()::where($attribute, $phone)->first();
     }
+
 }

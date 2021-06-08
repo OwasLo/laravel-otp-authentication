@@ -17,4 +17,18 @@ interface OtpAuthenticable
      * @return void
      */
     public function sendOtpAuthenticationNotification();
+
+    /**
+     * Determine the otp token for a user.
+     *
+     * @return bool
+     */
+    public function otpLogin();
+
+    /**
+     * Determine the otp token for a user.
+     *
+     * @return bool
+     */
+    public function otpLogout();
 }
