@@ -16,37 +16,14 @@ class OtpAuthentication
             ['phone' => $phone],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
-        app(Textit::class)->send(new TextitMessage($phone, 'Code:'.$otpToken->otp.', Please enter this code to verify your phone number'));
+        app(Textit::class)->send(new TextitMessage($phone, 'Code:' . $otpToken->otp . ', Please enter this code to verify your phone number'));
     }
 
-    public static function verifyPhone($phone, $otp){
-        $otpToken = OtpToken::where('phone',$phone)->first();
+    public static function verifyPhone($phone, $otp)
+    {
+        $otpToken = OtpToken::where('phone', $phone)->first();
 
-        if ($otpToken == null) {
-            return [
-                'status' => false,
-                'message' => "OTP_NOT_SENT",
-            ];
-        }
-
-        if ($otpToken->expires_at < Carbon::now()) {
-            return [
-                'status' => false,
-                'message' => "OTP_EXPIRED",
-            ];
-        }
-
-        if ($otpToken->otp != $otp) {
-            return [
-                'status' => false,
-                'message' => "OTP_INVALID",
-            ];
-        }
-
-        return [
-            'status' => true,
-            'message' => "OTP_SUCCESSFUL",
-        ];
+        return OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
     }
 
     public static function sendOTP(OtpAuthenticable $user)
@@ -58,6 +35,11 @@ class OtpAuthentication
     {
         $otpToken = $user->otpToken();
 
+        return OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
+    }
+
+    public static function isOtpAuthenticable($otpToken, $otp)
+    {
         if ($otpToken == null) {
             return [
                 'status' => false,

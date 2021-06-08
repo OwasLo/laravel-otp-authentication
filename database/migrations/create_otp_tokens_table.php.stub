@@ -13,8 +13,18 @@ return new class extends Migration
             $table->nullableMorphs('otp_authenticable');
             $table->unsignedSmallInteger('otp');
             $table->string('phone',11)->nullable();;
-            $table->date('expires_at');
+            $table->dateTime('expires_at');
             $table->timestamps();
         });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('otp_tokens');
     }
 };
