@@ -42,9 +42,11 @@ trait OtpAuthenticable
     {
         $otpToken = $this->otpToken();
 
-        if (OtpAuthentication::isOtpAuthenticable($otpToken, $otp)['status']) {
+        $response=OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
+        if ($response['status']) {
             Auth::guard($guard)->login($this, $remember = true);
         }
+        return $response;
     }
 
     /**
