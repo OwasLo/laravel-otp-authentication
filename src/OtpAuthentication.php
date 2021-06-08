@@ -33,7 +33,7 @@ class OtpAuthentication
 
     public static function verifyOTP(OtpAuthenticable $user, $otp)
     {
-        $otpToken = $user->otpToken();
+        $otpToken = $user->otpToken;
 
         return OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
     }

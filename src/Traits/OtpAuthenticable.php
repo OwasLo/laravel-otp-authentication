@@ -42,7 +42,7 @@ trait OtpAuthenticable
      */
     public function otpLogin($guard = "users", $otp)
     {
-        $otpToken = $this->otpToken();
+        $otpToken = $this->otpToken;
 
         $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
         if ($response['status']) {
