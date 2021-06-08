@@ -11,7 +11,6 @@ interface OtpAuthenticable
      */
     public function otpToken();
 
-
     /**
      * Send the phone verification notification.
      *
