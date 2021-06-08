@@ -66,7 +66,6 @@ trait OtpAuthenticable
 
     public static function findUserByPhone($phone, $attribute = "phone")
     {
-        return get_called_class();
-        //::where($attribute, $phone)->first()
+        return get_called_class()::where($attribute, $phone)->first();
     }
 }
