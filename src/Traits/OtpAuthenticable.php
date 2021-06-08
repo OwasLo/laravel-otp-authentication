@@ -73,5 +73,4 @@ trait OtpAuthenticable
     {
         return get_called_class()::where($attribute, $phone)->first();
     }
-
 }
