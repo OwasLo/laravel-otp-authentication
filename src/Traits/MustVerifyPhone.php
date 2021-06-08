@@ -55,9 +55,9 @@ trait MustVerifyPhone
     {
         $otpToken = $this->otpToken();
 
-        $response= OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
+        $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
 
-        if($response["status"]){
+        if ($response["status"]) {
             $this->markPhoneAsVerified();
         }
 
