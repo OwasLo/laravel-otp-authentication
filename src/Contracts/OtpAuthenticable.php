@@ -30,7 +30,7 @@ interface OtpAuthenticable
      *
      * @return void
      */
-    public function otpLogout();
+    public function otpLogout($session, $guard = "users");
 
     /**
      * Get user by phone number
