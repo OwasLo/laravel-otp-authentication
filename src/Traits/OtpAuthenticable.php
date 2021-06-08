@@ -12,7 +12,7 @@ trait OtpAuthenticable
 {
     /**
      * Determine the otp token for a user.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\MorphOne
      */
     public function otpToken()
