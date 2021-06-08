@@ -8,7 +8,6 @@ use Owaslo\OtpAuthentication\Notifications\VerifyPhone;
 
 trait MustVerifyPhone
 {
-
     /**
      * Determine if the user has verified their phone address.
      *
@@ -16,7 +15,7 @@ trait MustVerifyPhone
      */
     public function hasVerifiedPhone()
     {
-        return !is_null($this->phone_verified_at);
+        return ! is_null($this->phone_verified_at);
     }
 
     /**

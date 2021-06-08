@@ -4,7 +4,6 @@ namespace Owaslo\OtpAuthentication\Contracts;
 
 interface MustVerifyPhone
 {
-
     /**
      * Determine if the user has verified their phone address.
      *
@@ -32,5 +31,4 @@ interface MustVerifyPhone
      * @return string
      */
     public function getPhoneForVerification();
-    
 }
