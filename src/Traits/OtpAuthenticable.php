@@ -60,4 +60,9 @@ trait OtpAuthenticable
 
         $session->regenerateToken();
     }
+
+    public static function findUserByPhone($phone, $otpAuthenticableClass = "App\Model\User",  $attribute = "phone")
+    {
+        return $otpAuthenticableClass::where($attribute, $phone)->first();
+    }
 }

@@ -22,7 +22,7 @@ class OtpAuthentication
     public static function verifyPhone($phone, $otp)
     {
         $otpToken = OtpToken::where('phone', $phone)->first();
-
+        
         return OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
     }
 

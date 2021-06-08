@@ -1,5 +1,5 @@
 <?php
-// config for Owaslo/ClassName
+// config for Owaslo/OtpAuthentication
 return [
-
+    'phone_attribute_name'=>'phone',
 ];
