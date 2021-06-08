@@ -39,7 +39,7 @@ trait MustVerifyPhone
     public function sendPhoneVerificationNotification()
     {
         $otpToken = $this->otpToken()->updateOrCreate(
-            ['otpAuthenticable_id' => $this->id, 'otpAuthenticable_type' => get_class($this)],
+            ['otp_authenticable_id' => $this->id, 'otp_authenticable_type' => get_class($this)],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
 
