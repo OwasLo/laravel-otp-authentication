@@ -5,6 +5,7 @@ namespace Owaslo\OtpAuthentication\Traits;
 use Illuminate\Support\Carbon;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\OtpAuthentication\Notifications\VerifyPhone;
+use Owaslo\OtpAuthentication\OtpAuthentication;
 
 trait MustVerifyPhone
 {
@@ -37,12 +38,30 @@ trait MustVerifyPhone
      */
     public function sendPhoneVerificationNotification()
     {
-        $otpToken = OtpToken::updateOrCreate(
-            ['phone' => $phone],
+        $otpToken = $this->otpToken()->updateOrCreate(
+            ['otpAuthenticable_id' => $this->id, 'otpAuthenticable_type' => get_class($this)],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
 
         $this->notify(new VerifyPhone($otpToken->otp));
+    }
+
+    /**
+     * Verify phone
+     *
+     * @return void
+     */
+    public function verifyPhone($otp)
+    {
+        $otpToken = $this->otpToken();
+
+        $response= OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
+
+        if($response["status"]){
+            $this->markPhoneAsVerified();
+        }
+
+        return $response;
     }
 
     /**
