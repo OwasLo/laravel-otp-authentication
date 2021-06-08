@@ -15,7 +15,7 @@ trait OtpAuthenticable
      */
     public function otpToken()
     {
-        return $this->morphOne(OtpToken::class, 'otpAuthenticable');
+        return $this->morphOne(OtpToken::class, 'otpAuthenticable','otp_authenticable_type','otp_authenticable_id');
     }
 
     /**
