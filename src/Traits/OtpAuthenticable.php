@@ -26,7 +26,7 @@ trait OtpAuthenticable
     public function sendOtpAuthenticationNotification()
     {
         $otpToken = $this->otpToken()->updateOrCreate(
-            ['otpAuthenticable_id' => $this->id, 'otpAuthenticable_type' => get_class($this)],
+            ['otp_authenticable_id' => $this->id, 'otp_authenticable_type' => get_class($this)],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
 
@@ -40,7 +40,7 @@ trait OtpAuthenticable
      */
     public function otpLogin($guard = "users", $otp)
     {
-        $otpToken = $this->otpToken();
+        $otpToken = $this->otpToken;
 
         $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
         if ($response['status']) {
