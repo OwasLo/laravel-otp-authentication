@@ -18,7 +18,7 @@ class OtpToken extends Model
      */
     public function otpAuthenticable()
     {
-        return $this->morphTo();
+        return $this->morphTo(__FUNCTION__, 'otp_authenticable_type', 'otp_authenticable_id');
     }
 
     public static function generateOTP()

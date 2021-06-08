@@ -15,7 +15,7 @@ trait OtpAuthenticable
      */
     public function otpToken()
     {
-        return $this->morphOne(OtpToken::class, 'optAuthenticable');
+        return $this->morphOne(OtpToken::class, 'opt_authenticable');
     }
 
     /**
@@ -26,7 +26,7 @@ trait OtpAuthenticable
     public function sendOtpAuthenticationNotification()
     {
         $otpToken = $this->otpToken()->updateOrCreate(
-            ['otp_authenticable_id' => $this->id, 'otp_authenticable_type' => get_class($this)],
+            ['opt_authenticable_id' => $this->id, 'opt_authenticable_type' => get_class($this)],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
         );
 
