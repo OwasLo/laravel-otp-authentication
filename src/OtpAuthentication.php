@@ -10,11 +10,14 @@ use Owaslo\Textit\TextitMessage;
 
 class OtpAuthentication
 {
+    public static function getOtpExpireDuration(){
+        return config('otp-authentication.otp.expire_duration');
+    }
     public static function sendPhoneVerificationCode($phone)
     {
         $otpToken = OtpToken::updateOrCreate(
             ['phone' => $phone],
-            ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
+            ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(self::getOtpExpireDuration())]
         );
         app(Textit::class)->send(new TextitMessage($phone, 'Code:' . $otpToken->otp . ', Please enter this code to verify your phone number'));
     }

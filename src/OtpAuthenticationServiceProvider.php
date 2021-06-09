@@ -16,6 +16,7 @@ class OtpAuthenticationServiceProvider extends PackageServiceProvider
          */
         $package
             ->name('laravel-otp-authentication')
+            ->hasConfigFile()
             ->hasMigration('create_otp_tokens_table');
     }
 }

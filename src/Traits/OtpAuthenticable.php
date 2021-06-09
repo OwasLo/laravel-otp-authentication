@@ -29,7 +29,7 @@ trait OtpAuthenticable
     {
         $otpToken = $this->otpToken()->updateOrCreate(
             ['otp_authenticable_id' => $this->id, 'otp_authenticable_type' => get_class($this)],
-            ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(2)]
+            ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(OtpAuthentication::getOtpExpireDuration())]
         );
 
         $this->notify(new VerifyPhone($otpToken->otp));
