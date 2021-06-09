@@ -53,7 +53,7 @@ trait MustVerifyPhone
      */
     public function verifyPhone($otp)
     {
-        $otpToken = $this->otpToken();
+        $otpToken = $this->otpToken;
 
         $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
 
