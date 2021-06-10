@@ -23,7 +23,7 @@ interface OtpAuthenticable
      *
      * @return array
      */
-    public function otpLogin($guard = "users", $otp);
+    public function otpLogin($otp, $guard = "users");
 
     /**
      * Logout user
