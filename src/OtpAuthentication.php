@@ -10,9 +10,11 @@ use Owaslo\Textit\TextitMessage;
 
 class OtpAuthentication
 {
-    public static function getOtpExpireDuration(){
+    public static function getOtpExpireDuration()
+    {
         return config('otp-authentication.otp.expire_duration');
     }
+
     public static function sendPhoneVerificationCode($phone)
     {
         $otpToken = OtpToken::updateOrCreate(
