@@ -5,7 +5,7 @@ namespace Owaslo\OtpAuthentication\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use RandomLib\Factory as RandomLibFactory;
-
+use Owaslo\OtpAuthentication\OtpAuthentication;
 class OtpToken extends Model
 {
     use HasFactory;
@@ -26,6 +26,6 @@ class OtpToken extends Model
         $factory = new RandomLibFactory();
         $generator = $factory->getLowStrengthGenerator();
 
-        return $generator->generateInt(1000, 9999);
+        return $generator->generateString(OtpAuthentication::getOtpLength(), OtpAuthentication::getOtpCharacters());
     }
 }
