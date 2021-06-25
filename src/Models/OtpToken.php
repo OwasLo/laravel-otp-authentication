@@ -4,8 +4,9 @@ namespace Owaslo\OtpAuthentication\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use RandomLib\Factory as RandomLibFactory;
 use Owaslo\OtpAuthentication\OtpAuthentication;
+use RandomLib\Factory as RandomLibFactory;
+
 class OtpToken extends Model
 {
     use HasFactory;
