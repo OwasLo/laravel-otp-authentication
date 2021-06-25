@@ -14,6 +14,16 @@ class OtpAuthentication
     {
         return config('otp-authentication.otp.expire_duration');
     }
+    
+    public static function getOtpLength()
+    {
+        return config('otp-authentication.otp.length');
+    }
+    
+    public static function getOtpCharacters()
+    {
+        return config('otp-authentication.otp.characters');
+    }
 
     public static function sendPhoneVerificationCode($phone)
     {
