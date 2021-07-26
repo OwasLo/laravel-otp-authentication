@@ -3,14 +3,14 @@
 namespace Owaslo\OtpAuthentication\Traits;
 
 use ColumnNotFoundException;
+use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Schema;
+use Owaslo\OtpAuthentication\Helpers\AuthStatusMessage;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\OtpAuthentication\Notifications\VerifyPhone;
 use Owaslo\OtpAuthentication\OtpAuthentication;
-use Illuminate\Support\Facades\Schema;
-use Exception;
-use Owaslo\OtpAuthentication\Helpers\AuthStatusMessage;
 
 trait OtpAuthenticable
 {
@@ -51,6 +51,7 @@ trait OtpAuthenticable
         $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
         if ($response['status']) {
             Auth::guard($guard)->login($this, $remember = true);
+
             return ["status" => true, "message" => AuthStatusMessage::getAuthenticationSuccessfulMessage()];
         }
 
@@ -81,10 +82,11 @@ trait OtpAuthenticable
         try {
             $className = get_called_class();
             $tableName = with(new $className)->getTable();
-            if (!Schema::hasColumn($tableName, $attribute)) {
+            if (! Schema::hasColumn($tableName, $attribute)) {
                 throw new ColumnNotFoundException($attribute);
             }
             $user = $className::where($attribute, $phone)->first();
+
             return $user;
         } catch (Exception $e) {
             throw new Exception($e);

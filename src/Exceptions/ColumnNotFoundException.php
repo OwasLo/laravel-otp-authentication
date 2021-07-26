@@ -6,6 +6,7 @@ class ColumnNotFoundException extends Exception
     {
         //error message
         $errorMsg = $this->getMessage() . ' is not a valid attribute.';
+
         return $errorMsg;
     }
 }
