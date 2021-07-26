@@ -4,6 +4,7 @@ namespace Owaslo\OtpAuthentication;
 
 use Illuminate\Support\Carbon;
 use Owaslo\OtpAuthentication\Contracts\OtpAuthenticable;
+use Owaslo\OtpAuthentication\Helpers\OtpStatusMessage;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\Textit\Textit;
 use Owaslo\Textit\TextitMessage;
@@ -31,7 +32,7 @@ class OtpAuthentication
             ['phone' => $phone],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(self::getOtpExpireDuration())]
         );
-        app(Textit::class)->send(new TextitMessage($phone, 'Code:' . $otpToken->otp . ', Please enter this code to verify your phone number'));
+        //app(Textit::class)->send(new TextitMessage($phone, 'Code:' . $otpToken->otp . ', Please enter this code to verify your phone number'));
     }
 
     public static function verifyPhone($phone, $otp)
@@ -58,27 +59,27 @@ class OtpAuthentication
         if ($otpToken == null) {
             return [
                 'status' => false,
-                'message' => "OTP_NOT_SENT",
+                'message' => OtpStatusMessage::getOtpNotSentMessage(),
             ];
         }
 
         if ($otpToken->expires_at < Carbon::now()) {
             return [
                 'status' => false,
-                'message' => "OTP_EXPIRED",
+                'message' => OtpStatusMessage::getOtpExpiredMessage(),
             ];
         }
 
         if ($otpToken->otp != $otp) {
             return [
                 'status' => false,
-                'message' => "OTP_INVALID",
+                'message' => OtpStatusMessage::getOtpInvalidMessage(),
             ];
         }
 
         return [
             'status' => true,
-            'message' => "OTP_SUCCESSFUL",
+            'message' => OtpStatusMessage::getOtpValidMessage(),
         ];
     }
 }

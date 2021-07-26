@@ -35,7 +35,7 @@ interface OtpAuthenticable
     /**
      * Get user by phone number
      *
-     * @return void
+     * @return OTPAuthenticable
      */
     public static function findUserByPhone($phone, $attribute = "phone");
 }

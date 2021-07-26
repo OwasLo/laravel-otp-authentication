@@ -43,7 +43,7 @@ trait MustVerifyPhone
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(OtpAuthentication::getOtpExpireDuration())]
         );
 
-        $this->notify(new VerifyPhone($otpToken->otp));
+        //$this->notify(new VerifyPhone($otpToken->otp));
     }
 
     /**

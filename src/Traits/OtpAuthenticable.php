@@ -2,11 +2,15 @@
 
 namespace Owaslo\OtpAuthentication\Traits;
 
+use ColumnNotFoundException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Owaslo\OtpAuthentication\Models\OtpToken;
 use Owaslo\OtpAuthentication\Notifications\VerifyPhone;
 use Owaslo\OtpAuthentication\OtpAuthentication;
+use Illuminate\Support\Facades\Schema;
+use Exception;
+use Owaslo\OtpAuthentication\Helpers\AuthStatusMessage;
 
 trait OtpAuthenticable
 {
@@ -32,7 +36,7 @@ trait OtpAuthenticable
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(OtpAuthentication::getOtpExpireDuration())]
         );
 
-        $this->notify(new VerifyPhone($otpToken->otp));
+        //$this->notify(new VerifyPhone($otpToken->otp));
     }
 
     /**
@@ -47,6 +51,7 @@ trait OtpAuthenticable
         $response = OtpAuthentication::isOtpAuthenticable($otpToken, $otp);
         if ($response['status']) {
             Auth::guard($guard)->login($this, $remember = true);
+            return ["status" => true, "message" => AuthStatusMessage::getAuthenticationSuccessfulMessage()];
         }
 
         return $response;
@@ -69,10 +74,20 @@ trait OtpAuthenticable
     /**
      * Send otp notification.
      *
-     * @return void
+     * @return OTPAuthenticable
      */
     public static function findUserByPhone($phone, $attribute = "phone")
     {
-        return get_called_class()::where($attribute, $phone)->first();
+        try {
+            $className = get_called_class();
+            $tableName = with(new $className)->getTable();
+            if (!Schema::hasColumn($tableName, $attribute)) {
+                throw new ColumnNotFoundException($attribute);
+            }
+            $user = $className::where($attribute, $phone)->first();
+            return $user;
+        } catch (Exception $e) {
+            throw new Exception($e);
+        }
     }
 }

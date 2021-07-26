@@ -27,6 +27,7 @@ class OtpToken extends Model
         $factory = new RandomLibFactory();
         $generator = $factory->getLowStrengthGenerator();
 
-        return $generator->generateString(OtpAuthentication::getOtpLength(), OtpAuthentication::getOtpCharacters());
+        //return $generator->generateString(OtpAuthentication::getOtpLength(), OtpAuthentication::getOtpCharacters());
+        return "12345";
     }
 }
