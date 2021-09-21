@@ -43,7 +43,9 @@ trait MustVerifyPhone
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(OtpAuthentication::getOtpExpireDuration())]
         );
 
-        //$this->notify(new VerifyPhone($otpToken->otp));
+        if(!OtpAuthentication::getIsBlockSms()){
+            $this->notify(new VerifyPhone($otpToken->otp));
+        }
     }
 
     /**

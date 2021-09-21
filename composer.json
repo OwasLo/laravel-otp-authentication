@@ -18,7 +18,7 @@
     "require": {
         "php": "^8.0",
         "illuminate/contracts": "^8.37",
-        "owaslo/textit": "9999999-dev",
+        "owaslo/textit": "*",
         "paragonie/random-lib": "^2.0",
         "spatie/laravel-package-tools": "^1.4.3"
     },
@@ -56,6 +56,15 @@
             ],
             "aliases": {
                 "OtpAuthentication": "Owaslo\\OtpAuthentication\\OtpAuthenticationFacade"
+            }
+        }
+    },
+    "repositories": {
+        "owaslo/laravel-textit": {
+            "type": "vcs",
+            "url": "https://github.com/OwasLo/laravel-textit",
+            "options": {
+                "symlink": true
             }
         }
     },
