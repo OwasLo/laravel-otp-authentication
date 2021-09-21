@@ -37,7 +37,7 @@ class OtpAuthentication
             ['phone' => $phone],
             ['otp' => OtpToken::generateOTP(), 'expires_at' => Carbon::now()->addMinutes(self::getOtpExpireDuration())]
         );
-        if (!OtpAuthentication::getIsBlockSms()) {
+        if (! OtpAuthentication::getIsBlockSms()) {
             app(Textit::class)->send(new TextitMessage($phone, 'Code:' . $otpToken->otp . ', Please enter this code to verify your phone number'));
         }
     }
